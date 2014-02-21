@@ -654,6 +654,9 @@
 			// Update element styles.
 			if ( !CKEDITOR.tools.isEmpty( styles ) )
 				attrs.style = CKEDITOR.tools.writeCssText( styles );
+			// Add class to element to indicate alignment
+			el.attributes.class += ' align-' + align;
+
 		}
 
 		return el;
