@@ -654,8 +654,10 @@
 			// Update element styles.
 			if ( !CKEDITOR.tools.isEmpty( styles ) )
 				attrs.style = CKEDITOR.tools.writeCssText( styles );
-			// Add class to element to indicate alignment
-			el.attributes.class += ' align-' + align;
+			// Add class to figure element to indicate alignment
+			if (attrs['class'] === undefined) {attrs['class']=''}
+			attrs['class'] = attrs['class'].replace(/align\-left|align\-right|align\-center/g, '').trim();
+			attrs['class'] += ' align-' + align;
 
 		}
 
