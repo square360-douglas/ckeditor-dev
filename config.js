@@ -48,7 +48,7 @@ CKEDITOR.editorConfig = function( config ) {
 	'htmlwriter,' +
 	'iframe,' +
 	'wysiwygarea,' +
-	'image,' +
+	'image2,' +
 	'indent,' +
 	'indentblock,' +
 	'indentlist,' +
@@ -83,7 +83,6 @@ CKEDITOR.editorConfig = function( config ) {
 	'wsc,' +
 	'lineutils,' +
 	'widget,' +
-	'image2,' +
 	'tableresize';
 	config.skin = 'moono';
 	// %REMOVE_END%
