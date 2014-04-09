@@ -629,9 +629,29 @@
 				resizeWrapper.replaceWith( img );
 			} else
 				img = el.getFirst( 'img' );
-		}
+				
+			// Remove previous align classes from img
+			var imgAttrs = img.attributes;
+			if(imgAttrs['class'] !== undefined) imgAttrs['class'] = imgAttrs['class'].replace(/align\-left|align\-right|align\-center/g, '').trim();
+			// add algin to inline image
+			if ( align && align != 'none' ) {
+				if (imgAttrs['class'] === undefined) {imgAttrs['class']=''}
+				imgAttrs['class'] += ' align-' + align;
+			}
+		}		
 
+		// Remove previous align classes from wrapper or img.
+		if(attrs['class'] !== undefined) attrs['class'] = attrs['class'].replace(/align\-left|align\-right|align\-center/g, '').trim();
+		
 		if ( align && align != 'none' ) {
+
+			if ( this.inline ) {
+				// Add class to img element to indicate alignment
+				if (attrs['class'] === undefined) {attrs['class']=''}
+				attrs['class'] += ' align-' + align;
+			}
+
+
 			var styles = CKEDITOR.tools.parseCssText( attrs.style || '' );
 
 			// When the widget is captioned (<figure>) and internally centering is done
@@ -644,6 +664,7 @@
 			//       <figcaption>C</figcaption>
 			//     </figure>
 			//   </div>
+
 			if ( align == 'center' && el.name == 'figure' )
 				el = el.wrapWith( new CKEDITOR.htmlParser.element( 'div', { style: 'text-align:center' } ) );
 
@@ -654,11 +675,7 @@
 			// Update element styles.
 			if ( !CKEDITOR.tools.isEmpty( styles ) )
 				attrs.style = CKEDITOR.tools.writeCssText( styles );
-			// Add class to figure element to indicate alignment
-			if (attrs['class'] === undefined) {attrs['class']=''}
-			attrs['class'] = attrs['class'].replace(/align\-left|align\-right|align\-center/g, '').trim();
-			attrs['class'] += ' align-' + align;
-
+			
 		}
 
 		return el;
